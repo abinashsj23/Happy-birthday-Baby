@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Sivi ❤️</title>
 <style>
+  .modal-open {
+        overflow: hidden;
+    }
+
+    .blurred {
+        filter: blur(6px) brightness(0.9);
+        transition: filter 0.2s ease;
+    }
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
   :root{
@@ -146,10 +154,19 @@
 </div>
 
 <!-- PAGE CONTENT (will be blurred while popup or notes open) -->
-<div id="pageWrap" class="blur-wrap">
+<!-- WELCOME POPUP (outside blur) -->
+<div id="welcomePopup" class="popup">
+    ...
+</div>
 
-  <!-- popup welcome -->
-  <div id="welcomePopup" class="popup" role="dialog" aria-hidden="true">
+<!-- NOTES PANEL POPUP (outside blur) -->
+<div id="notesPanel">
+    ...
+</div>
+
+<!-- EVERYTHING ELSE -->
+<div id="pageWrap" class="blur-wrap">
+ role="dialog" aria-hidden="true">
     <h2>Happy Birthday baby ❤️</h2>
     <p>You make my days feel lighter, and my life a little softer.<br>
        You're genuinely important to me, baby.</p>
@@ -316,12 +333,14 @@ function toggleNotes(){
   if(notesOpen){
     panel.classList.add('open');
     document.getElementById('pageWrap').classList.add('blurred');
+document.body.classList.add('modal-open');
     panel.setAttribute('aria-hidden','false');
     // load first note
     selectNote(0);
   } else {
     panel.classList.remove('open');
     document.getElementById('pageWrap').classList.remove('blurred');
+document.body.classList.remove('modal-open');
     panel.setAttribute('aria-hidden','true');
   }
 }
@@ -385,3 +404,4 @@ document.addEventListener('keydown', (e)=>{
 </script>
 </body>
 </html>
+
